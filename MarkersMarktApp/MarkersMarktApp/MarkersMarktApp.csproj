@@ -23,23 +23,15 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
 
-<<<<<<< Updated upstream
   <ItemGroup>
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.756" />
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.250205002" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.3" />
-    <PackageReference Include="System.Text.Json" Version="9.0.2" />
-=======
-	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
-		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
-		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.250205002" />
-		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
-		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
-		<PackageReference Include="Soenneker.AutoFaker.Overrides.IdNamePair" Version="2.1.350" />
-		<PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.2" />
-		<PackageReference Include="System.Text.Json" Version="9.0.2" />
->>>>>>> Stashed changes
+	<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
+	<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
+	<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.250205002" />
+	<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
+	<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
+	<PackageReference Include="Soenneker.AutoFaker.Overrides.IdNamePair" Version="2.1.350" />
+	<PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.2" />
+	<PackageReference Include="System.Text.Json" Version="9.0.2" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 
