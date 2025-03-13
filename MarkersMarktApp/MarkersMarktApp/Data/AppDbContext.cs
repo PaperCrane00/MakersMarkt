@@ -36,6 +36,17 @@ namespace MarkersMarktApp.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Seller_Review>()
+                .HasOne(sr => sr.Seller)
+                .WithMany(u => u.Seller_Reviews)
+                .HasForeignKey(sr => sr.SellerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Seller_Review>()
+                .HasOne(sr => sr.Reviewer)
+                .WithMany()
+                .HasForeignKey(sr => sr.ReviewerId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
