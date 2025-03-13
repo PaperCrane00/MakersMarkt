@@ -1,3 +1,4 @@
+using MakersMarktApp.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,7 +18,7 @@ using static System.Net.Mime.MediaTypeNames;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace MarkersMarktApp
+namespace MakersMarktApp
 {
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
@@ -28,74 +29,72 @@ namespace MarkersMarktApp
         {
             this.InitializeComponent();
 
-            //if(!isCreated)
-            //{
-            //    using (var db = new AppDbContext())
-            //    {
-            //        db.Database.EnsureDeleted();
-            //        db.Database.EnsureCreated();
-            //    }
-            //}
+            if (!isCreated)
+            {
+                using (var db = new AppDbContext())
+                {
+                    db.Database.EnsureDeleted();
+                    db.Database.EnsureCreated();
+                }
+            }
 
-            //if (isCreated == true)
-            //{
-            //    accountCreated.Visibility = Visibility.Visible;
-            //}
+            if (isCreated == true)
+            {
+                accountCreated.Visibility = Visibility.Visible;
+            }
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            //var mail = emailTextBox.Text;
-            //var password = passPasswordBox.Password;
-            //if ( mail.Count() == 0 && password.Count() == 0 )
-            //{
-            //    fillError.Text = "Fill in every field!";
-            //    fillError.Visibility = Visibility.Visible;
-            //    emailError.Visibility = Visibility.Collapsed;
-            //    passError.Visibility = Visibility.Collapsed;
+            var mail = emailTextBox.Text;
+            var password = passPasswordBox.Password;
+            if (mail.Count() == 0 && password.Count() == 0)
+            {
+                fillError.Text = "Fill in every field!";
+                fillError.Visibility = Visibility.Visible;
+                emailError.Visibility = Visibility.Collapsed;
+                passError.Visibility = Visibility.Collapsed;
 
-            //}
-            //else if (mail.Count() == 0)
-            //{
-            //    fillError.Visibility = Visibility.Collapsed;
-            //    emailError.Visibility = Visibility.Visible;
-            //    passError.Visibility = Visibility.Collapsed;
-            //}
-            //else if (password.Count() == 0)
-            //{
-            //    fillError.Visibility = Visibility.Collapsed;
-            //    emailError.Visibility = Visibility.Collapsed;
-            //    passError.Visibility = Visibility.Visible;
-            //}
-            //else
-            //{
-            //    fillError.Text = "User not found!";
-            //    fillError.Visibility = Visibility.Collapsed;
-            //    emailError.Visibility = Visibility.Collapsed;
-            //    passError.Visibility = Visibility.Collapsed;
+            }
+            else if (mail.Count() == 0)
+            {
+                fillError.Visibility = Visibility.Collapsed;
+                emailError.Visibility = Visibility.Visible;
+                passError.Visibility = Visibility.Collapsed;
+            }
+            else if (password.Count() == 0)
+            {
+                fillError.Visibility = Visibility.Collapsed;
+                emailError.Visibility = Visibility.Collapsed;
+                passError.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                fillError.Text = "User not found!";
+                fillError.Visibility = Visibility.Collapsed;
+                emailError.Visibility = Visibility.Collapsed;
+                passError.Visibility = Visibility.Collapsed;
 
-            //    using (var db = new AppDbContext())
-            //    {
-            //        var user = db.Users.Where(u => u.Email.ToLower().Equals(mail.ToLower()) && u.Password.Equals(password)).FirstOrDefault();
-            //        if (user == null)
-            //        {
-            //            fillError.Visibility = Visibility.Visible;
-            //        }
-            //        else
-            //        {
-            //            var itemWindow = new ItemWindow(user.Id);
-            //            itemWindow.Activate();
-            //            this.Close();
-            //        }
-            //    }
-            //}
+                using (var db = new AppDbContext())
+                {
+                    var user = db.Users.Where(u => u.Email.ToLower().Equals(mail.ToLower()) && u.Password.Equals(password)).FirstOrDefault();
+                    if (user == null)
+                    {
+                        fillError.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        
+                    }
+                }
+            }
         }
 
         private void Register_Click(object sender, RoutedEventArgs e)
         {
-            //var registerWindow = new RegisterWindow();
-            //registerWindow.Activate();
-            //this.Close();
+            var registerWindow = new RegisterWindow();
+            registerWindow.Activate();
+            this.Close();
         }
     }
 }

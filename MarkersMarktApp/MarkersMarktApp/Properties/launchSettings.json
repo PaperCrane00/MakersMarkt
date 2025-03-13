@@ -1,9 +1,9 @@
 {
   "profiles": {
-    "MarkersMarktApp (Package)": {
+    "MakersMarktApp (Package)": {
       "commandName": "MsixPackage"
     },
-    "MarkersMarktApp (Unpackaged)": {
+    "MakersMarktApp (Unpackaged)": {
       "commandName": "Project"
     }
   }
