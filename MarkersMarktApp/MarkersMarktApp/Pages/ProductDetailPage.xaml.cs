@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,8 @@ namespace MarkersMarktApp.Pages
 
 			ProductNameTextBlock.Text = _selectedProduct.Name;
 			ProductDescriptionTextBlock.Text = _selectedProduct.Description;
+			var bitmapImage = new BitmapImage(new Uri(_selectedProduct.ImageLink));
+			ProductImage.Source = bitmapImage;
 		}
 
 		private void BackButton_Click(object sender, RoutedEventArgs e)

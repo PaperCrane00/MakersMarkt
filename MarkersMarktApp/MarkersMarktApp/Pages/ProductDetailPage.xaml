@@ -12,6 +12,7 @@
     <Grid>
         <Button Content="Back" x:Name="BackButton" Click="BackButton_Click" />
         <StackPanel>
+            <Image x:Name="ProductImage" Width="512" Height="512" />
             <TextBlock x:Name="ProductNameTextBlock" />
             <TextBlock x:Name="ProductDescriptionTextBlock" />
         </StackPanel>
