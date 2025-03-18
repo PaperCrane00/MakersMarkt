@@ -37,13 +37,9 @@ namespace MakersMarktApp
                 db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
             }
-<<<<<<< HEAD
             NavigationService.Initialize(MainFrame); 
             NavigationService.NavigateTo(typeof(LoginPage));
 
-=======
-            MainFrame.Navigate(typeof(ProductsPage));
->>>>>>> 5356cadd18b02d88e3a97a384fd15d93937e8c5c
         }
     }
 }
