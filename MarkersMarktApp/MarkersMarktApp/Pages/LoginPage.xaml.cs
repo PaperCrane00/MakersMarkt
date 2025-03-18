@@ -71,7 +71,7 @@ namespace MarkersMarktApp.Pages
                     }
                     else
                     {
-                        Frame.Navigate(typeof(MainPage), user.Id.ToString());
+                        Frame.Navigate(typeof(MainPage));
                     }
                 }
             }
@@ -79,7 +79,7 @@ namespace MarkersMarktApp.Pages
 
         private void Register_Click(object sender, RoutedEventArgs e)
         {
-
+            Frame.Navigate(typeof(RegisterPage));
         }
     }
 }
