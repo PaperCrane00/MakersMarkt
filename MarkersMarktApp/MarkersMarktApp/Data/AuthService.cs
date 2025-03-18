@@ -1,32 +1,34 @@
 ﻿using MakersMarktApp.Data;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
+    
 
-namespace MakersMarktApp.Services
+public static class AuthService
 {
-    public static class AuthService
+    public static User CurrentUser { get; set; }
+
+    public static User Login(string email, string password)
     {
-        public static User CurrentUser { get; set; }
-
-        public static User Login(string username, string password)
+        using (var db = new AppDbContext())
         {
-            using (var db = new AppDbContext())
+            var user = db.Users
+                .FirstOrDefault(u => u.Email.ToLower() == email.ToLower() && u.Password == password);
+
+            if (user != null)
             {
-                var user = db.Users
-                    .FirstOrDefault(u => u.Username == username && u.Password == password);
-
-                if (user != null)
-                {
-                    CurrentUser = user;
-                    return user;
-                }
+                CurrentUser = user;
+                return user;
             }
-            return null;
         }
+        return null;
+    }
 
-        public static void Logout()
-        {
-            CurrentUser = null;
-        }
+    public static int? GetCurrentUserId()
+    {
+        return CurrentUser?.Id;
+    }
+
+    public static void Logout()
+    {
+        CurrentUser = null;
     }
 }

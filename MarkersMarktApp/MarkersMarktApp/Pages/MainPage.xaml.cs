@@ -1,61 +1,50 @@
 using MakersMarktApp.Data;
-using MakersMarktApp.Services;
 using MarkersMarktApp.Pages;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
 
 namespace MakersMarktApp.Pages
 {
     public sealed partial class MainPage : Page
     {
-       private List<Product> allUserProducts = new List<Product>();
+        private List<Product> allUserProducts = new List<Product>();
+
         public MainPage()
         {
             this.InitializeComponent();
             LoadUserProducts();
+            UserItemsListView.ItemsSource = allUserProducts; 
         }
 
         private void LoadUserProducts()
         {
-            User user = AuthService.CurrentUser;
+            int? userId = AuthService.GetCurrentUserId();
 
-            if (user == null)
+            if (userId.HasValue)
             {
-                NavigationService.NavigateTo(typeof(LoginPage));
-                return;
-            }
-
-            using (var db = new AppDbContext())
-            {
-                allUserProducts = db.Products
-                                    .Where(p => p.UserId == user.Id)
-                                    .ToList();
+                using (var db = new AppDbContext())
+                {
+                    allUserProducts = db.Products
+                                         .Where(ui => ui.UserId == userId.Value)
+                                         .ToList();
+                }
             }
         }
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             AuthService.Logout();
-            ShowMessage("U bent uitgelogd!");
-            NavigationService.NavigateTo(typeof(LoginPage));
+            ShowMessage("You have been logged out!");
+            Frame.Navigate(typeof(LoginPage));
         }
 
         private void ShowMessage(string message)
         {
             ContentDialog dialog = new ContentDialog()
             {
-                Title = "Informatie",
+                Title = "Information",
                 Content = message,
                 CloseButtonText = "OK",
                 XamlRoot = this.XamlRoot
