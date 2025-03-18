@@ -67,5 +67,45 @@ namespace MakersMarktApp.Pages
             };
             _ = dialog.ShowAsync();
         }
-    }
+
+        private async void UserProductsListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var clickedItem = (Product)e.ClickedItem;
+
+            ContentDialog itemDetailsDialog = new ContentDialog()
+            {
+                Title = clickedItem.Name,
+                Content = $"Beschrijving: {clickedItem.Description}\n" +
+                          $"Prijs: {clickedItem.Price}\n",
+                CloseButtonText = "OK",
+                XamlRoot = this.XamlRoot
+            };
+            await itemDetailsDialog.ShowAsync();
+        }
+
+        private void TypeFilterBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void UserItemsListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void ViewProfile_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+		private void ViewProducts_Click(object sender, RoutedEventArgs e)
+		{
+            Frame.Navigate(typeof(ProductsPage));
+		}
+	}
 }
