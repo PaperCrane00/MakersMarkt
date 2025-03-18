@@ -16,6 +16,9 @@
     <None Remove="Pages\AdminPage.xaml" />
     <None Remove="Pages\LoginPage.xaml" />
     <None Remove="Pages\MainPage.xaml" />
+    <None Remove="Pages\ProductDetailPage.xaml" />
+    <None Remove="Pages\ProductsCreatePage.xaml" />
+    <None Remove="Pages\ProductsPage.xaml" />
     <None Remove="Pages\RegisterPage.xaml" />
     <None Remove="RegisterWindow.xaml" />
   </ItemGroup>
@@ -49,6 +52,21 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\ProductDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\ProductsCreatePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\ProductsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\RegisterPage.xaml">
