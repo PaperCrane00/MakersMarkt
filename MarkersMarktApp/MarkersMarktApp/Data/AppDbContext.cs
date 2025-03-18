@@ -163,7 +163,7 @@ namespace MakersMarktApp.Data
                 .RuleFor(i => i.Password, f => f.Internet.Password())
                 .RuleFor(i => i.Credit, f => f.Random.Int(0, 1000))
                 .RuleFor(i => i.Is_Verified, f => f.Random.Bool())
-                .Generate(100);
+                .Generate(99);
             modelBuilder.Entity<User>().HasData(user);
         }
     }
