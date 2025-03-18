@@ -37,7 +37,7 @@
             <CheckBox x:Name="IsVerifiedCheckBox" Content="Is Verified" Margin="0,5,0,10"/>
             <CheckBox x:Name="ModerationCheckBox" Content="Under Moderation" Margin="0,5,0,10"/>
 
-            <Button Content="Create Product" Width="200" Margin="0,10,0,0" Click="CreateProduct_Click"/>
+            <Button Content="Create Product" Width="200" Margin="0,10,0,0" Click="Button_Click"/>
         </StackPanel>
     </Grid>
 </Page>
