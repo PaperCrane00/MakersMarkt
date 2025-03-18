@@ -72,7 +72,7 @@ namespace MakersMarktApp.Data
                 .RuleFor(i => i.Id, f => f.IndexFaker + 1)
                 .RuleFor(i => i.Name, f => f.Commerce.Product())
                 .RuleFor(i => i.Description, f => f.Commerce.ProductDescription())
-                .RuleFor(i => i.ImageLink, f => f.Image.PlaceImgUrl())
+                .RuleFor(i => i.ImageLink, f => f.Image.PicsumUrl())
                 .RuleFor(i => i.UserId, f => f.Random.Int(1, 5))
                 .RuleFor(i => i.TypeId, f => f.Random.Int(1, 5))
                 .RuleFor(i => i.SpecificId, f => f.Random.Int(1, 100))

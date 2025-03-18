@@ -16,7 +16,10 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Product List" FontSize="20" FontWeight="Bold" Margin="10"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+            <TextBlock Text="Product List" FontSize="20" FontWeight="Bold" Margin="10"/>
+            <Button Content="Add product" x:Name="CreateButton" Click="CreateButton_Click" />
+        </StackPanel>
 
         <ListView 
             x:Name="ProductsListView" 
@@ -27,9 +30,13 @@
             Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="localData:Product">
-                    <StackPanel Padding="10">
-                        <TextBlock Text="{x:Bind Name}" FontSize="16" FontWeight="Bold"/>
-                        <TextBlock Text="{x:Bind Description}" FontSize="14" Foreground="Gray"/>
+                    <StackPanel Padding="10" Orientation="Horizontal">
+                        <Image Source="{x:Bind ImageLink}" Width="128" Height="128"/>
+                        <StackPanel Margin="10 0 0 0">
+                            <TextBlock Text="{x:Bind Name}" FontSize="16" FontWeight="Medium"/>
+                            <TextBlock Text="{x:Bind Description}" FontSize="14"/>
+                            <TextBlock Text="{x:Bind Price}" FontSize="16" FontWeight="Bold" />
+                        </StackPanel>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

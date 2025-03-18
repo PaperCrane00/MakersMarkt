@@ -52,5 +52,10 @@ namespace MakersMarktApp.Pages
 
 			Frame.Navigate(typeof(ProductDetailPage), product);
 		}
+
+		private void CreateButton_Click(object sender, RoutedEventArgs e)
+		{
+			Frame.Navigate(typeof(ProductsCreatePage));
+		}
 	}
 }
