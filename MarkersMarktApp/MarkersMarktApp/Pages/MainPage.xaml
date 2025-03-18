@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <ListView x:Name="UserItemsListView" Grid.Row="1" IsItemClickEnabled="True">
+        <ListView x:Name="UserItemsListView" Grid.Row="1" ItemClick="UserProductsListView_ProductClick" IsItemClickEnabled="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Margin="5" Padding="10">
