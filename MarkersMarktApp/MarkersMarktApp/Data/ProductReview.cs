@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace MakersMarktApp.Data
 {
-    internal class Seller_Review
+    public class ProductReview
     {
         public int Id { get; set; }
-        public int SellerId { get; set; }
-        public User Seller { get; set; }
+        public int ProductId { get; set; }
+        public Product Product { get; set; }
         public int ReviewerId { get; set; }
         public User Reviewer { get; set; }
         public string Title { get; set; }

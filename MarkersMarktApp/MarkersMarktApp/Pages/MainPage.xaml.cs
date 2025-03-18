@@ -6,13 +6,20 @@ using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Navigation;
 
 namespace MakersMarktApp.Pages
 {
     public sealed partial class MainPage : Page
     {
-        private List<Product> allUserProducts = new List<Product>();
-
+       private List<Product> allUserProducts = new List<Product>();
         public MainPage()
         {
             this.InitializeComponent();
@@ -21,9 +28,9 @@ namespace MakersMarktApp.Pages
 
         private void LoadUserProducts()
         {
-            int? userId = AuthService.CurrentUserId;
+            User user = AuthService.CurrentUser;
 
-            if (userId == null)
+            if (user == null)
             {
                 NavigationService.NavigateTo(typeof(LoginPage));
                 return;
@@ -32,7 +39,7 @@ namespace MakersMarktApp.Pages
             using (var db = new AppDbContext())
             {
                 allUserProducts = db.Products
-                                    .Where(p => p.UserId == userId)
+                                    .Where(p => p.UserId == user.Id)
                                     .ToList();
             }
         }
@@ -69,6 +76,26 @@ namespace MakersMarktApp.Pages
                 XamlRoot = this.XamlRoot
             };
             await itemDetailsDialog.ShowAsync();
+        }
+
+        private void TypeFilterBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void UserItemsListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void ViewProfile_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
