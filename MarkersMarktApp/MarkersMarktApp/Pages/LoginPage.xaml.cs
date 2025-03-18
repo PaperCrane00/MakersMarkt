@@ -16,6 +16,7 @@ using MakersMarktApp.Data;
 using MakersMarktApp;
 using Windows.System;
 using MakersMarktApp.Pages;
+using MakersMarktApp.Services;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -33,49 +34,38 @@ namespace MarkersMarktApp.Pages
         }
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            var mail = emailTextBox.Text;
+            var email = emailTextBox.Text;
             var password = passPasswordBox.Password;
-            if (mail.Count() == 0 && password.Count() == 0)
+
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
+                // Toon foutmelding als velden leeg zijn
                 fillError.Text = "Fill in every field!";
                 fillError.Visibility = Visibility.Visible;
                 emailError.Visibility = Visibility.Collapsed;
                 passError.Visibility = Visibility.Collapsed;
-
-            }
-            else if (mail.Count() == 0)
-            {
-                fillError.Visibility = Visibility.Collapsed;
-                emailError.Visibility = Visibility.Visible;
-                passError.Visibility = Visibility.Collapsed;
-            }
-            else if (password.Count() == 0)
-            {
-                fillError.Visibility = Visibility.Collapsed;
-                emailError.Visibility = Visibility.Collapsed;
-                passError.Visibility = Visibility.Visible;
             }
             else
             {
-                fillError.Text = "User not found!";
-                fillError.Visibility = Visibility.Collapsed;
-                emailError.Visibility = Visibility.Collapsed;
-                passError.Visibility = Visibility.Collapsed;
+                var user = AuthService.Login(email, password);
 
-                using (var db = new AppDbContext())
+                if (user == null)
                 {
-                    var user = db.Users.Where(u => u.Email.ToLower().Equals(mail.ToLower()) && u.Password.Equals(password)).FirstOrDefault();
-                    if (user == null)
-                    {
-                        fillError.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-                        Frame.Navigate(typeof(MainPage), user.Id.ToString());
-                    }
+                    // Foutmelding als de gebruiker niet bestaat
+                    fillError.Text = "User not found!";
+                    fillError.Visibility = Visibility.Visible;
+                    emailError.Visibility = Visibility.Collapsed;
+                    passError.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    // Gebruiker gevonden, ga naar MainPage
+                    fillError.Visibility = Visibility.Collapsed;
+                    Frame.Navigate(typeof(MainPage));
                 }
             }
         }
+
 
         private void Register_Click(object sender, RoutedEventArgs e)
         {

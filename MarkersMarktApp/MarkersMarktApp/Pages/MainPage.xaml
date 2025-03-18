@@ -13,26 +13,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,0,0,20">
-            <TextBox x:Name="SearchBox" PlaceholderText="Zoek items..." TextChanged="SearchBox_TextChanged" Margin="0,0,0,10"/>
-
-            <ComboBox x:Name="TypeFilterBox" SelectionChanged="TypeFilterBox_SelectionChanged" PlaceholderText="Filter op Type" Margin="0,0,0,10">
-                <ComboBoxItem Content="Alle"/>
-                <ComboBoxItem Content="Wapen"/>
-                <ComboBoxItem Content="Accessoire"/>
-                <ComboBoxItem Content="Armor"/>
-
-            </ComboBox>
-
-            <ComboBox x:Name="RarityFilterBox" SelectionChanged="TypeFilterBox_SelectionChanged" PlaceholderText="Filter op Zeldzaamheid">
-                <ComboBoxItem Content="Alle"/>
-                <ComboBoxItem Content="Zeldzaam"/>
-                <ComboBoxItem Content="Episch"/>
-                <ComboBoxItem Content="Legendarisch"/>
-            </ComboBox>
-        </StackPanel>
-
-        <ListView x:Name="UserItemsListView" Grid.Row="1" ItemClick="UserItemsListView_ItemClick" IsItemClickEnabled="True">
+        <ListView x:Name="UserItemsListView" Grid.Row="1" IsItemClickEnabled="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Margin="5" Padding="10">
@@ -44,8 +25,8 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20">
-            <Button Content="Mijn Profiel" Click="ViewProfile_Click"/>
             <Button Content="Uitloggen" Click="LogoutButton_Click"/>
         </StackPanel>
     </Grid>
