@@ -1,5 +1,4 @@
 using MakersMarktApp.Data;
-using MarkersMarktApp.Pages;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -9,48 +8,42 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using WinRT;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace MakersMarktApp.Pages
+namespace MarkersMarktApp.Pages
 {
 	/// <summary>
 	/// An empty page that can be used on its own or navigated to within a Frame.
 	/// </summary>
-	public sealed partial class ProductsPage : Page
+	public sealed partial class ProductDetailPage : Page
 	{
+		private Product _selectedProduct;
 
-		public List<Product> ProductsList = new();
-
-		public ProductsPage()
+		public ProductDetailPage()
 		{
 			this.InitializeComponent();
-
-			LoadProducts();
 		}
 
-		public void LoadProducts()
+		protected override void OnNavigatedTo(NavigationEventArgs e)
 		{
-			using(var context = new AppDbContext())
-			{
-				ProductsList = context.Products.ToList();
-			}
+			base.OnNavigatedTo(e);
+			_selectedProduct = (Product)e.Parameter;
 
-			ProductsListView.ItemsSource = ProductsList;
+			ProductNameTextBlock.Text = _selectedProduct.Name;
+			ProductDescriptionTextBlock.Text = _selectedProduct.Description;
 		}
 
-		private void ProductsListView_ItemClick(object sender, ItemClickEventArgs e)
+		private void BackButton_Click(object sender, RoutedEventArgs e)
 		{
-			var product = (Product)e.ClickedItem;
-
-			Frame.Navigate(typeof(ProductDetailPage), product);
+			Frame.GoBack();
 		}
 	}
 }

@@ -16,6 +16,7 @@ using Windows.Foundation.Collections;
 using static System.Net.Mime.MediaTypeNames;
 using Windows.System;
 using MarkersMarktApp.Pages;
+using MakersMarktApp.Pages;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -36,7 +37,7 @@ namespace MakersMarktApp
                 db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
             }
-            MainFrame.Navigate(typeof(LoginPage));
+            MainFrame.Navigate(typeof(ProductsPage));
         }
     }
 }

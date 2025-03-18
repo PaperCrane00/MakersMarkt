@@ -11,16 +11,29 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <StackPanel>
-            <ListView x:Name="ProductsListView" ItemsSource="{x:Bind ProductsList, Mode=OneWay}">
-                <ListView.DataContext>
-                    <DataTemplate x:DataType="localData:Product">
-                        <StackPanel>
-                            <TextBlock Text="{x:Bind Name}" x:Name="ProductNameTextBlock" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.DataContext>
-            </ListView>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Product List" FontSize="20" FontWeight="Bold" Margin="10"/>
+
+        <ListView 
+            x:Name="ProductsListView" 
+            ItemsSource="{x:Bind ProductsList, Mode=OneWay}"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            IsItemClickEnabled="True"
+            ItemClick="ProductsListView_ItemClick"
+            Grid.Row="1">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="localData:Product">
+                    <StackPanel Padding="10">
+                        <TextBlock Text="{x:Bind Name}" FontSize="16" FontWeight="Bold"/>
+                        <TextBlock Text="{x:Bind Description}" FontSize="14" Foreground="Gray"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
     </Grid>
 </Page>
