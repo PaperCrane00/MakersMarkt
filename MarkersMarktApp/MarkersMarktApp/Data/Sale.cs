@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MakersMarktApp.Data
 {
-    internal class Sale
+    public class Sale
     {
         public int Id { get; set; }
         public int ProductId { get; set; }
@@ -14,7 +14,7 @@ namespace MakersMarktApp.Data
         public int BuyerId { get; set; }
         public User Buyer { get; set; }
         public string Status { get; set; }
-        public string Status_Description { get; set; }
+        public string StatusDescription { get; set; }
         public DateTime DateSold { get; set; }
     }
 }

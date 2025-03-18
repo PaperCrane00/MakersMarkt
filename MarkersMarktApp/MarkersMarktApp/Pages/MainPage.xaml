@@ -16,7 +16,7 @@
         <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,0,0,20">
             <TextBox x:Name="SearchBox" PlaceholderText="Zoek items..." TextChanged="SearchBox_TextChanged" Margin="0,0,0,10"/>
 
-            <ComboBox x:Name="TypeFilterBox" SelectionChanged="Filter_Changed" PlaceholderText="Filter op Type" Margin="0,0,0,10">
+            <ComboBox x:Name="TypeFilterBox" SelectionChanged="TypeFilterBox_SelectionChanged" PlaceholderText="Filter op Type" Margin="0,0,0,10">
                 <ComboBoxItem Content="Alle"/>
                 <ComboBoxItem Content="Wapen"/>
                 <ComboBoxItem Content="Accessoire"/>
@@ -24,7 +24,7 @@
 
             </ComboBox>
 
-            <ComboBox x:Name="RarityFilterBox" SelectionChanged="Filter_Changed" PlaceholderText="Filter op Zeldzaamheid">
+            <ComboBox x:Name="RarityFilterBox" SelectionChanged="TypeFilterBox_SelectionChanged" PlaceholderText="Filter op Zeldzaamheid">
                 <ComboBoxItem Content="Alle"/>
                 <ComboBoxItem Content="Zeldzaam"/>
                 <ComboBoxItem Content="Episch"/>

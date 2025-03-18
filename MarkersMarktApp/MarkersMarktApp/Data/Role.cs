@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace MakersMarktApp.Data
 {
-    internal class Role
+    public class Role
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public List<Role_User> Users { get; set; }
+        public List<RoleUser> Users { get; set; }
     }
 }

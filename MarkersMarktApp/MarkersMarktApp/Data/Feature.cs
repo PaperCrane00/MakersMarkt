@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace MakersMarktApp.Data
 {
-    internal class Feature
+    public class Feature
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public List<Feature_Specific> Specifics { get; set; }
+        public List<FeatureSpecific> Specifics { get; set; }
     }
 }

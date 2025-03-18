@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace MakersMarktApp.Data
 {
-    internal class Type
+    public class Type
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public List<Product> Products { get; set; }
     }
 }
