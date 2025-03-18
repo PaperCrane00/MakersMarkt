@@ -104,5 +104,10 @@ namespace MarkersMarktApp.Pages
 				return;
 			}
 		}
+
+		private void BackButton_Click(object sender, RoutedEventArgs e)
+		{
+			Frame.GoBack();
+		}
 	}
 }

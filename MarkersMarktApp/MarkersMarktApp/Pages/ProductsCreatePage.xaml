@@ -17,7 +17,10 @@
             </Grid.RowDefinitions>
 
             <StackPanel>
-                <TextBlock Text="Create Product" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Create Product" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+                    <Button x:Name="BackButton" Content="Back" Click="BackButton_Click" />
+                </StackPanel>
 
                 <TextBox Header="Name" x:Name="NameTextBox" Width="200" Margin="0,5,0,10"/>
 
