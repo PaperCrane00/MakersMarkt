@@ -46,6 +46,7 @@
         </ListView>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20">
             <Button Content="Mijn Profiel" Click="ViewProfile_Click"/>
+            <Button Content="Marketplace" Click="ViewProducts_Click" />
             <Button Content="Uitloggen" Click="LogoutButton_Click"/>
         </StackPanel>
     </Grid>

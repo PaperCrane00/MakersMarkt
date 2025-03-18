@@ -97,5 +97,10 @@ namespace MakersMarktApp.Pages
         {
 
         }
-    }
+
+		private void ViewProducts_Click(object sender, RoutedEventArgs e)
+		{
+            Frame.Navigate(typeof(ProductsPage));
+		}
+	}
 }
