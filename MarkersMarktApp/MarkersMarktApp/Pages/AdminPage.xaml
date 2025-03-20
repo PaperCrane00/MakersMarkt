@@ -4,12 +4,129 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MarkersMarktApp.Pages"
+    xmlns:localData="using:MakersMarktApp.Data"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Orientation="Horizontal">
+            <Button x:Name="UserButtonAdmin" Click="UserButtonAdmin_Click">Users</Button>
+            <Button x:Name="ProductButtonAdmin" Click="ProductButtonAdmin_Click">Products</Button>
+        </StackPanel>
+
+        <ListView x:Name="UserListViewAdmin" IsItemClickEnabled="True" Grid.Row="1" Grid.Column="0" Visibility="Collapsed" ItemClick="UserListViewAdmin_ItemClick">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="localData:User">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="{x:Bind Username}" TextAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="{x:Bind Email}" TextAlignment="Center"/>
+                            <TextBlock Grid.Column="2" Text="{x:Bind Credit}" TextAlignment="Center"/>
+                        </Grid>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ListView x:Name="ProductListViewAdmin" IsItemClickEnabled="True" Grid.Row="1" Grid.Column="0" Visibility="Collapsed" ItemClick="ProductListViewAdmin_ItemClick">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="localData:Product">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="{x:Bind Name}" TextAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="{x:Bind Description}" TextAlignment="Center"/>
+                            <TextBlock Grid.Column="2" Text="{x:Bind Price}" TextAlignment="Center"/>
+                        </Grid>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ScrollView Grid.Row="1" Grid.Column="1" Visibility="Collapsed" x:Name="UserScrollViewAdmin">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Visibility="Collapsed" x:Name="UserIdUserUpdateAdminTextBlock"/>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Name:" TextAlignment="Center"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="UserNameUserUpdateAdminTextBlock" TextAlignment="Center"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Email:" TextAlignment="Center"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="UserEmailUserUpdateAdminTextBlock" TextAlignment="Center"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Credit:" TextAlignment="Center"/>
+                <TextBox Grid.Row="2" Grid.Column="1" x:Name="UserCreditUserUpdateAdminTextBox" TextAlignment="Center"/>
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Varified:" TextAlignment="Center"/>
+                <CheckBox Grid.Row="3" Grid.Column="1" x:Name="UserVarifiedUserUpdateAdminCkeckbox"/>
+                <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" x:Name="UpdateUserButtonAdmin" Click="UpdateUserButtonAdmin_Click">Update User</Button>
+                <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" x:Name="DeleteUserButtonAdmin" Click="DeleteUserButtonAdmin_Click">Delete User</Button>
+            </Grid>
+        </ScrollView>
+
+        <ScrollView Grid.Row="1" Grid.Column="1" Visibility="Collapsed" x:Name="ProductScrollViewAdmin">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Visibility="Collapsed" x:Name="ProductIdProductUpdateAdminTextBlock"/>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Name:" TextAlignment="Center"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="ProductNameProductUpdateAdminTextBlock" TextAlignment="Center"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Description:" TextAlignment="Center"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="ProductDescriptionProductUpdateAdminTextBlock" TextAlignment="Center"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Price:" TextAlignment="Center"/>
+                <TextBox Grid.Row="2" Grid.Column="1" x:Name="ProductPriceProductUpdateAdminTextBox" TextAlignment="Center"/>
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Varified:" TextAlignment="Center"/>
+                <CheckBox Grid.Row="3" Grid.Column="1" x:Name="ProductVarifiedProductUpdateAdminCkeckbox"/>
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Moderation:" TextAlignment="Center"/>
+                <CheckBox Grid.Row="4" Grid.Column="1" x:Name="ProductModerationProductUpdateAdminCkeckbox"/>
+                <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" x:Name="UpdateProductButtonAdmin" Click="UpdateProductButtonAdmin_Click">Update Product</Button>
+                <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" x:Name="DeleteProductButtonAdmin" Click="DeleteProductButtonAdmin_Click">Delete Product</Button>
+            </Grid>
+        </ScrollView>
     </Grid>
 </Page>
