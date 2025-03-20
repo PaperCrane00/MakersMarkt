@@ -25,7 +25,7 @@ namespace MakersMarktApp.Services
         {
             using (var db = new AppDbContext())
             {
-                return db.Users.Any(u => u.Username == username && (userId == null || u.Id != userId));
+                return db.Users.Any(u => u.Username.ToLower() == username.ToLower() && (userId == null || u.Id != userId));
             }
         }
 
