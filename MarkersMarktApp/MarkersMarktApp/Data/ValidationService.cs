@@ -28,5 +28,13 @@ namespace MakersMarktApp.Services
                 return db.Users.Any(u => u.Username == username && (userId == null || u.Id != userId));
             }
         }
+
+        public static bool IsEmailTaken(string email, int? userId = null)
+        {
+            using (var db = new AppDbContext())
+            {
+                return db.Users.Any(u => u.Email.ToLower() == email.ToLower() && (userId == null || u.Id != userId));
+            }
+        }
     }
 }

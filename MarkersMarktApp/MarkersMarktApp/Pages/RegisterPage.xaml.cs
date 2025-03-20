@@ -1,35 +1,19 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
 using MakersMarktApp.Data;
-using MakersMarktApp;
 using MakersMarktApp.Services;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace MarkersMarktApp.Pages
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class RegisterPage : Page
     {
         public RegisterPage()
         {
             this.InitializeComponent();
         }
+
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(LoginPage));
@@ -42,78 +26,69 @@ namespace MarkersMarktApp.Pages
             var password = passPasswordBox.Password;
             var repeatPass = passRepeatPasswordBox.Password;
 
-            if (username.Count() == 0 && mail.Count() == 0 && password.Count() == 0 && repeatPass.Count() == 0)
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(mail) || 
+                string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(repeatPass))
             {
                 fillError.Text = "Fill in every field!";
                 fillError.Visibility = Visibility.Visible;
+                return;
+            }
+
+            using (var db = new AppDbContext())
+            {
+                fillError.Visibility = Visibility.Collapsed;
                 usernameError.Visibility = Visibility.Collapsed;
                 emailError.Visibility = Visibility.Collapsed;
                 passError.Visibility = Visibility.Collapsed;
                 passRepeatError.Visibility = Visibility.Collapsed;
-
-            }
-            else
-            {
-                using (var db = new AppDbContext())
+                
+                if (ValidationService.IsUsernameTaken(username))
                 {
-                    fillError.Visibility = Visibility.Collapsed;
-                    usernameError.Visibility = Visibility.Collapsed;
-                    emailError.Visibility = Visibility.Collapsed;
-                    passError.Visibility = Visibility.Collapsed;
-                    passRepeatError.Visibility = Visibility.Collapsed;
-                    if (username.Count() == 0)
-                    {
-                        usernameError.Visibility = Visibility.Visible;
-                    }
-                    if (mail.Count() == 0)
-                    {
-                        emailError.Text = "Fill in an E-mail!";
-                        emailError.Visibility = Visibility.Visible;
-                    }
-                    if (!ValidationService.IsValidEmail(mail) && mail.Count() != 0)
-
-                    {
-                        emailError.Text = "Fill in a correct E-mail!";
-                        emailError.Visibility = Visibility.Visible;
-                    }
-                    if (db.Users.Where(e => mail.ToLower() == e.Email.ToLower()).Count() != 0)
-                    {
-                        emailError.Text = "E-mail already in use!";
-                        emailError.Visibility = Visibility.Visible;
-                    }
-                    if (password.Count() == 0)
-                    {
-                        passError.Visibility = Visibility.Visible;
-                    }
-                    if (repeatPass.Count() == 0)
-                    {
-                        passRepeatError.Text = "Fill in your password again!";
-                        passRepeatError.Visibility = Visibility.Visible;
-                    }
-                    if (password.Count() != 0 && repeatPass.Count() != 0 && !password.Equals(repeatPass))
-                    {
-                        passRepeatError.Text = "Passwords are not the same!";
-                        passRepeatError.Visibility = Visibility.Visible;
-                    }
-                    if (username.Count() != 0 && mail.Count() != 0 && password.Count() != 0 && repeatPass.Count() != 0 && db.Users.Where(e => mail.ToLower() == e.Email.ToLower()).Count() == 0 && password.Equals(repeatPass) && ValidationService.IsValidEmail(mail))
-                    {
-                        fillError.Text = "Everything checks out!";
-                        fillError.Visibility = Visibility.Visible;
-                        usernameError.Visibility = Visibility.Collapsed;
-                        emailError.Visibility = Visibility.Collapsed;
-                        passError.Visibility = Visibility.Collapsed;
-                        passRepeatError.Visibility = Visibility.Collapsed;
-                        User user = new User();
-                        user.Username = username;
-                        user.Email = mail;
-                        user.Password = password;
-                        user.Credit = 0;
-                        user.Is_Verified = false;
-                        db.Users.Add(user);
-                        db.SaveChanges();
-                        Frame.Navigate(typeof(LoginPage));
-                    }
+                    usernameError.Text = "Username already in use!";
+                    usernameError.Visibility = Visibility.Visible;
+                    return;
                 }
+
+                if (!ValidationService.IsValidEmail(mail))
+                {
+                    emailError.Text = "Fill in a correct E-mail!";
+                    emailError.Visibility = Visibility.Visible;
+                    return;
+                }
+
+                if (ValidationService.IsEmailTaken(mail))
+                {
+                    emailError.Text = "E-mail already in use!";
+                    emailError.Visibility = Visibility.Visible;
+                    return;
+                }
+
+                if (!ValidationService.IsValidPassword(password))
+                {
+                    passError.Text = "Password does not meet security requirements!";
+                    passError.Visibility = Visibility.Visible;
+                    return;
+                }
+
+                if (!ValidationService.ArePasswordsMatching(password, repeatPass))
+                {
+                    passRepeatError.Text = "Passwords are not the same!";
+                    passRepeatError.Visibility = Visibility.Visible;
+                    return;
+                }
+
+                var user = new User
+                {
+                    Username = username,
+                    Email = mail,
+                    Password = password,
+                    Credit = 0,
+                    Is_Verified = false
+                };
+
+                db.Users.Add(user);
+                db.SaveChanges();
+                Frame.Navigate(typeof(LoginPage));
             }
         }
     }
