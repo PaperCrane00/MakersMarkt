@@ -84,6 +84,18 @@ namespace MakersMarktApp.Pages
             await itemDetailsDialog.ShowAsync();
         }
 
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string query = SearchBox.Text.ToLower();
+
+            var filteredProducts = allUserProducts
+                .Where(p => p.Name.ToLower().Contains(query) || p.Description.ToLower().Contains(query))
+                .ToList();
+
+            UserItemsListView.ItemsSource = filteredProducts;
+        }
+
+
         private async void ViewProfile_Click(object sender, RoutedEventArgs e)
         {
             int? userId = AuthService.GetCurrentUserId();
